@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/crorn/route.ts": {
+    "app/api/crorn/route.ts": {
       "maxDuration": 10
     }
   }
