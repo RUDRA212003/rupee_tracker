@@ -22,7 +22,7 @@ const HeroCarousel = () => {
         showThumbs={false}
         autoPlay
         infiniteLoop
-        interval={3000}
+        interval={1500}
         showArrows={false}
         showStatus={true}
       >
