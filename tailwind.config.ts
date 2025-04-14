@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class', // Enable dark mode using class
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,12 +11,12 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: "#E43030",
-          "orange": "#D48D3B",
-          "green": "#3E9242"
+          orange: "#D48D3B",
+          green: "#3E9242"
         },
         secondary: "#282828",
         "gray-200": "#EAECF0",
-        "gray-300": "D0D5DD",
+        "gray-300": "#D0D5DD",
         "gray-500": "#667085",
         "gray-600": "#475467",
         "gray-700": "#344054",
@@ -41,4 +42,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}
