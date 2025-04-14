@@ -5,11 +5,14 @@ import { Carousel } from 'react-responsive-carousel';
 import Image from "next/image";
 
 const heroImages = [
-  { imgUrl: '/assets/images/hero-1.svg', alt: 'smartwatch'},
-  { imgUrl: '/assets/images/hero-2.svg', alt: 'bag'},
-  { imgUrl: '/assets/images/hero-3.svg', alt: 'lamp'},
-  { imgUrl: '/assets/images/hero-4.svg', alt: 'air fryer'},
-  { imgUrl: '/assets/images/hero-5.svg', alt: 'chair'},
+  { imgUrl: '/assets/images/apple.svg', alt: 'apple'},
+  { imgUrl: '/assets/images/samsung.svg', alt: 'bag'},
+  { imgUrl: '/assets/images/gaming.svg', alt: 'lamp'},
+  { imgUrl: '/assets/images/TOYS.svg', alt: 'air fryer'},
+  { imgUrl: '/assets/images/furniter.svg', alt: 'chair'},
+  { imgUrl: '/assets/images/samsumg-watch.svg', alt: 'samsung watch'},
+  { imgUrl: '/assets/images/macbook.svg', alt: 'macbook'},
+  { imgUrl: '/assets/images/sony.svg', alt: 'sony'},
 ]
 
 const HeroCarousel = () => {
@@ -17,11 +20,11 @@ const HeroCarousel = () => {
     <div className="hero-carousel">
       <Carousel
         showThumbs={false}
-        // autoPlay
+        autoPlay
         infiniteLoop
-        // interval={2000}
+        interval={3000}
         showArrows={false}
-        showStatus={false}
+        showStatus={true}
       >
         {heroImages.map((image) => (
           <Image 
