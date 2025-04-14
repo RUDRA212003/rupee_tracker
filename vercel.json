@@ -1,7 +1,6 @@
-// vercel.json
 {
   "functions": {
-    "api/cron.ts": {
+    "api/crorn/route.ts": {
       "maxDuration": 10
     }
   }
