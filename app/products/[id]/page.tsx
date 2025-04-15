@@ -20,22 +20,22 @@ const ProductDetails = async ({ params: { id } }: Props) => {
   const similarProducts = await getSimilarProducts(id);
 
   return (
-    <div className="product-container">
-      <div className="flex gap-28 xl:flex-row flex-col">
-        <div className="product-image">
+    <div className="product-container px-4 sm:px-8 py-6">
+      <div className="flex gap-6 sm:gap-10 lg:gap-28 flex-col xl:flex-row">
+        <div className="product-image flex justify-center w-full sm:w-[50%] xl:w-[40%]">
           <Image 
             src={product.image}
             alt={product.title}
             width={580}
             height={400}
-            className="mx-auto"
+            className="w-full h-auto object-contain"
           />
         </div>
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col sm:w-full xl:w-[60%]">
           <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
-            <div className="flex flex-col gap-3">
-              <p className="text-[28px] text-secondary font-semibold">
+            <div className="flex flex-col gap-3 w-full sm:w-auto">
+              <p className="text-[24px] sm:text-[28px] text-secondary font-semibold">
                 {product.title}
               </p>
 
@@ -49,14 +49,13 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="product-hearts">
+              <div className="product-hearts flex items-center gap-1">
                 <Image 
                   src="/assets/icons/red-heart.svg"
                   alt="heart"
                   width={20}
                   height={20}
                 />
-
                 <p className="text-base font-semibold text-[#D46F77]">
                   {product.reviewsCount}
                 </p>
@@ -84,17 +83,17 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
           <div className="product-info">
             <div className="flex flex-col gap-2">
-              <p className="text-[34px] text-secondary font-bold">
+              <p className="text-[28px] sm:text-[34px] text-secondary font-bold">
                 {product.currency} {formatNumber(product.currentPrice)}
               </p>
-              <p className="text-[21px] text-black opacity-50 line-through">
+              <p className="text-[18px] sm:text-[21px] text-black opacity-50 line-through">
                 {product.currency} {formatNumber(product.originalPrice)}
               </p>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mt-4">
               <div className="flex gap-3">
-                <div className="product-stars">
+                <div className="product-stars flex items-center gap-1">
                   <Image 
                     src="/assets/icons/star.svg"
                     alt="star"
@@ -106,7 +105,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   </p>
                 </div>
 
-                <div className="product-reviews">
+                <div className="product-reviews flex items-center gap-1">
                   <Image 
                     src="/assets/icons/comment.svg"
                     alt="comment"
@@ -121,7 +120,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
               <p className="text-sm text-black opacity-50">
                 <span className="text-primary-green font-semibold">93% </span> of
-                buyers have recommeded this.
+                buyers have recommended this.
               </p>
             </div>
           </div>
@@ -157,12 +156,16 @@ const ProductDetails = async ({ params: { id } }: Props) => {
 
       <div className="flex flex-col gap-16">
         <div className="flex flex-col gap-5">
-          <h3 className="text-2xl text-secondary font-semibold">
+          <h3 className="text-xl sm:text-2xl text-secondary font-semibold">
             Product Description
           </h3>
 
           <div className="flex flex-col gap-4">
-            {product?.description?.split('\n')}
+            {product?.description?.split('\n').map((line, idx) => (
+              <p key={idx} className="text-sm text-black opacity-70">
+                {line}
+              </p>
+            ))}
           </div>
         </div>
 
@@ -173,8 +176,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
             width={22}
             height={22}
           />
-
-<Link href={product.url} target="_blank" className="text-base text-white">
+          <Link href={product.url} target="_blank" className="text-base text-white">
             Buy Now
           </Link>
         </button>
@@ -192,7 +194,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default ProductDetails
+export default ProductDetails;
