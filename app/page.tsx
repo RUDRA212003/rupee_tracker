@@ -30,7 +30,10 @@ const home = async () => {
               Track your price and get it ON "TIME" with unbelievable prices
             </p>
 
-            <Searchbar />
+            {/* Adding id here for smooth scroll to Searchbar */}
+            <div id="search-section">
+              <Searchbar />
+            </div>
           </div>
           <HeroCarousel />
         </div>

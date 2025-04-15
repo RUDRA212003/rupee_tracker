@@ -28,9 +28,18 @@ const Navbar = () => {
     document.documentElement.classList.toggle('dark', newTheme === 'dark')
   }
 
+  const handleSearchClick = () => {
+    const searchSection = document.getElementById('search-section')
+    if (searchSection) {
+      searchSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <header className="w-full">
-      <nav className="nav">
+    <header className="w-full px-4 py-3 shadow-sm bg-white dark:bg-black">
+      <nav className="flex justify-between items-center flex-wrap gap-4">
+        
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-1">
           <Image 
             src="/assets/icons/logo.svg"
@@ -38,28 +47,29 @@ const Navbar = () => {
             height={27}
             alt="logo"
           />
-
           <p className="nav-logo">
             Rupee<span className='text-primary'>Tracker</span>
           </p>
         </Link>
 
-        <div className="flex items-center gap-5">
+        {/* Right-side Icons */}
+        <div className="flex items-center gap-3">
           {navIcons.map((icon) => (
             <Image 
               key={icon.alt}
               src={icon.src}
               alt={icon.alt}
-              width={28}
-              height={28}
-              className="object-contain"
+              width={24}
+              height={24}
+              className="object-contain cursor-pointer"
+              onClick={icon.alt === 'search' ? handleSearchClick : undefined}
             />
           ))}
 
-          {/* Dark/Light Mode Toggle Button */}
+          {/* Theme toggle button */}
           <button
             onClick={toggleTheme}
-            className="ml-2 px-3 py-1 border rounded text-sm bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+            className="px-2 py-1 border rounded text-sm bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
           >
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
