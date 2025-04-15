@@ -12,10 +12,10 @@ const isValidAmazonProductURL = (url: string) => {
     if (
       hostname.includes('amazon.com') || 
       hostname.includes('amazon.in') || 
-      hostname.includes('amzn.in') || // Added for mobile short links
+      hostname.includes('amzn.in') || 
       hostname.endsWith('amazon.com') || 
       hostname.endsWith('amazon.in') || 
-      hostname.endsWith('amzn.in')    // Added for mobile short links
+      hostname.endsWith('amzn.in')
     ) {
       return true;
     }
@@ -30,7 +30,7 @@ const Searchbar = () => {
   const [searchPrompt, setSearchPrompt] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false); // Track success
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,18 +43,13 @@ const Searchbar = () => {
 
     try {
       setIsLoading(true);
-      setMessage(''); // Reset the message before starting the request
-      setIsSuccess(false); // Reset success state
+      setMessage('');
+      setIsSuccess(false);
 
-      // Scrape the product page
-      const product = await scrapeAndStoreProduct(searchPrompt);
+      await scrapeAndStoreProduct(searchPrompt);
 
-      if (!product) {
-        setMessage('Scroll down and tap on your product');
-      } else {
-        setMessage('Product fetched successfully. Scroll down to view it.');
-        setIsSuccess(true); // Set success to true after fetching the product
-      }
+      setMessage('Scroll down and tap on your product');
+      setIsSuccess(true);
     } catch (error) {
       console.error(error);
       setMessage('Scroll down and tap on your product');
@@ -79,17 +74,17 @@ const Searchbar = () => {
         disabled={searchPrompt === ''}
       >
         {isLoading ? (
-          <div className={`spinner ${isSuccess ? 'checkmark show' : ''}`}></div> // Show spinner or checkmark based on loading state
+          <div className={`spinner ${isSuccess ? 'checkmark show' : ''}`}></div>
         ) : isSuccess ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-check-circle text-green-500">
             <circle cx="12" cy="12" r="10" />
             <path d="M9 12l2 2 4-4" />
-          </svg> // Success checkmark
+          </svg>
         ) : (
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="55" height="25" viewBox="0 0 48 48">
             <path fill="#616161" d="M34.6 28.1H38.6V45.1H34.6z" transform="rotate(-45.001 36.586 36.587)"></path>
-            <path fill="#616161" d="M20 4A16 16 0 1 0 20 36A16 16 0 1 0 20 4Z"></path>
-            <path fill="#37474F" d="M36.2 32.1H40.2V44.400000000000006H36.2z" transform="rotate(-45.001 38.24 38.24)"></path>
+            <path fill="#616161" d="M20 4A16 16 0=" />
+            <path fill="#616161" d="M36.2 32.1H40.2V44.4H36.2z" transform="rotate(-45.001 38.24 38.24)"></path>
             <path fill="#64B5F6" d="M20 7A13 13 0 1 0 20 33A13 13 0 1 0 20 7Z"></path>
             <path fill="#BBDEFB" d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"></path>
           </svg>
