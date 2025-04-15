@@ -153,17 +153,53 @@
 .spinner {
   width: 40px;
   aspect-ratio: 1.154;
-  clip-path: polygon(50% 0,100% 100%,0 100%);
-  --c:no-repeat linear-gradient(#ffee00 0 0);
-  background: var(--c),var(--c),var(--c),var(--c),var(--c);
-  background-size: 100% calc(100%/5 + 1px);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  --c: no-repeat linear-gradient(#ffee00 0 0);
+  background: var(--c), var(--c), var(--c), var(--c), var(--c);
+  background-size: 100% calc(100% / 5 + 1px);
   animation: l15 2s infinite;
+  display: inline-block;
+  transition: opacity 0.3s ease-in-out;
 }
+
+.spinner.checkmark {
+  display: none; /* Initially hide checkmark */
+}
+
+.spinner.checkmark.show {
+  display: inline-block; /* Show the checkmark */
+  opacity: 1; /* Fade in the checkmark */
+}
+
 @keyframes l15 {
-  0%  {background-position: 0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4)}
-  20% {background-position: 0 calc(4*100%/4) ,0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4)}
-  40% {background-position: 0 calc(4*100%/4) ,0 calc(3*100%/4) ,0 calc(-2*100%/4),0 calc(-2*100%/4),0 calc(-2*100%/4)}
-  60% {background-position: 0 calc(4*100%/4) ,0 calc(3*100%/4) ,0 calc(2*100%/4) ,0 calc(-2*100%/4),0 calc(-2*100%/4)}
-  80% {background-position: 0 calc(4*100%/4) ,0 calc(3*100%/4) ,0 calc(2*100%/4) ,0 calc(1*100%/4) ,0 calc(-2*100%/4)}
-  100%{background-position: 0 calc(4*100%/4) ,0 calc(3*100%/4) ,0 calc(2*100%/4) ,0 calc(1*100%/4) ,0 calc(0*100%/4)}
+  0% {
+    background-position: 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4);
+  }
+  20% {
+    background-position: 0 calc(4 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4);
+  }
+  40% {
+    background-position: 0 calc(4 * 100% / 4), 0 calc(3 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4);
+  }
+  60% {
+    background-position: 0 calc(4 * 100% / 4), 0 calc(3 * 100% / 4), 0 calc(2 * 100% / 4), 0 calc(-2 * 100% / 4), 0 calc(-2 * 100% / 4);
+  }
+  80% {
+    background-position: 0 calc(4 * 100% / 4), 0 calc(3 * 100% / 4), 0 calc(2 * 100% / 4), 0 calc(1 * 100% / 4), 0 calc(-2 * 100% / 4);
+  }
+  100% {
+    background-position: 0 calc(4 * 100% / 4), 0 calc(3 * 100% / 4), 0 calc(2 * 100% / 4), 0 calc(1 * 100% / 4), 0 calc(0 * 100% / 4);
+  }
 }
+
+.feather-check-circle {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.spinner.checkmark.show + .feather-check-circle {
+  display: inline-block;
+  opacity: 1;
+}
+
