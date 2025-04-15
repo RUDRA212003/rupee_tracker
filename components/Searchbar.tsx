@@ -108,7 +108,7 @@ const Searchbar = () => {
         type="text"
         value={searchPrompt}
         onChange={(e) => setSearchPrompt(e.target.value)}
-        placeholder={placeholder || "Paste your amazon link here"}
+        placeholder={placeholder || "Paste your amazon link"}
         className="searchbar-input outline-none border border-gray-300 p-3 rounded-md flex-1 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:ring-2 hover:ring-blue-300"
       />
 
