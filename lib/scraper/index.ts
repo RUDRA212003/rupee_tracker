@@ -2,10 +2,20 @@
 
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { extractCurrency, extractDescription, extractPrice } from '../utils';
+import { extractCurrency, extractPrice } from '../utils';
+
+// Clean description extractor
+function extractDescription($: cheerio.CheerioAPI): string {
+  const rawDescription =
+    $('#productDescription').text().trim() ||
+    $('#feature-bullets').text().trim() ||
+    $('meta[name="description"]').attr('content')?.trim();
+
+  return rawDescription?.replace(/\s+/g, ' ') || 'No description available.';
+}
 
 export async function scrapeAmazonProduct(url: string) {
-  if(!url) return;
+  if (!url) return;
 
   // BrightData proxy configuration
   const username = String(process.env.BRIGHT_DATA_USERNAME);
@@ -30,6 +40,7 @@ export async function scrapeAmazonProduct(url: string) {
 
     // Extract the product title
     const title = $('#productTitle').text().trim();
+    
     const currentPrice = extractPrice(
       $('.priceToPay span.a-price-whole'),
       $('.a.size.base.a-color-price'),
@@ -53,10 +64,10 @@ export async function scrapeAmazonProduct(url: string) {
 
     const imageUrls = Object.keys(JSON.parse(images));
 
-    const currency = extractCurrency($('.a-price-symbol'))
+    const currency = extractCurrency($('.a-price-symbol'));
     const discountRate = $('.savingsPercentage').text().replace(/[-%]/g, "");
 
-    const description = extractDescription($)
+    const description = extractDescription($);
 
     // Construct data object with scraped information
     const data = {
@@ -69,7 +80,7 @@ export async function scrapeAmazonProduct(url: string) {
       priceHistory: [],
       discountRate: Number(discountRate),
       category: 'category',
-      reviewsCount:100,
+      reviewsCount: 100,
       stars: 4.5,
       isOutOfStock: outOfStock,
       description,
