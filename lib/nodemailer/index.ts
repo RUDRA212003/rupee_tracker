@@ -1,5 +1,6 @@
-'use server'
+"use server"
 
+import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
 import nodemailer from 'nodemailer';
 
 const Notification = {
@@ -7,18 +8,22 @@ const Notification = {
   CHANGE_OF_STOCK: 'CHANGE_OF_STOCK',
   LOWEST_PRICE: 'LOWEST_PRICE',
   THRESHOLD_MET: 'THRESHOLD_MET',
-};
+}
 
-export async function generateEmailBody(product, type) {
+export async function generateEmailBody(
+  product: EmailProductInfo,
+  type: NotificationType
+  ) {
   const THRESHOLD_PERCENTAGE = 40;
+  // Shorten the product title
+  const shortenedTitle =
+    product.title.length > 20
+      ? `${product.title.substring(0, 20)}...`
+      : product.title;
 
-  // Shorten the product title if it's too long
-  const shortenedTitle = product.title.length > 20 ? `${product.title.substring(0, 20)}...` : product.title;
+  let subject = "";
+  let body = "";
 
-  let subject = '';
-  let body = '';
-
-  // Generate email content based on the notification type
   switch (type) {
     case Notification.WELCOME:
       subject = `Welcome to Price Tracking for ${shortenedTitle}`;
@@ -75,33 +80,28 @@ export async function generateEmailBody(product, type) {
   return { subject, body };
 }
 
-// Nodemailer transport configuration with updated SMTP settings
 const transporter = nodemailer.createTransport({
   pool: true,
-  host: 'smtp.live.com', // Updated SMTP host for Hotmail
-  port: 587, // Use port 587 for STARTTLS
-  secure: false, // Don't use SSL; use STARTTLS instead
+  service: 'hotmail',
+  port: 2525,
   auth: {
-    user: 'rudreshmanjunath15@gmail.com', // Your email address
-    pass: process.env.EMAIL_PASSWORD, // Make sure the password is correct in the environment
+    user: 'rudreshmanjunath15@gmail.com',
+    pass: process.env.EMAIL_PASSWORD,
   },
-  maxConnections: 1,
-});
+  maxConnections: 1
+})
 
-// Function to send an email
-export const sendEmail = async (emailContent, sendTo) => {
+export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
   const mailOptions = {
-    from: 'rudreshmanjunath5@gmail.com',
+    from: 'javascriptmastery@outlook.com',
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
-  };
-
-  // Send the email using nodemailer
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent: ', info);
-  } catch (error) {
-    console.error('Error occurred:', error);
   }
-};
+
+  transporter.sendMail(mailOptions, (error: any, info: any) => {
+    if(error) return console.log(error);
+    
+    console.log('Email sent: ', info);
+  })
+}
