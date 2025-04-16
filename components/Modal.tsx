@@ -20,13 +20,12 @@ const Modal = ({ productId }: Props) => {
 
     await addUserEmailToProduct(productId, email);
 
-    setIsSubmitting(false)
-    setEmail('')
-    closeModal()
+    setIsSubmitting(false);
+    setEmail('');
+    closeModal();
   }
 
   const openModal = () => setIsOpen(true);
-
   const closeModal = () => setIsOpen(false);
 
   return (
@@ -50,11 +49,8 @@ const Modal = ({ productId }: Props) => {
               <Dialog.Overlay className="fixed inset-0" /> 
             </Transition.Child>
 
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            />
-            
+            <span className="inline-block h-screen align-middle" aria-hidden="true" />
+
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -118,10 +114,14 @@ const Modal = ({ productId }: Props) => {
                     />
                   </div>
 
-                  <button type="submit"
-                    className="dialog-btn"
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Track'}
+                  <button type="submit" className="dialog-btn" disabled={isSubmitting}>
+                  {isSubmitting ? (
+  <div className="flex items-center justify-center">
+    <div className="loader" />
+  </div>
+) : 'Track'}
+
+
                   </button>
                 </form>
               </div>

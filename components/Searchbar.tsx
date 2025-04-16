@@ -66,7 +66,7 @@ const Searchbar = () => {
         charIndex++;
         if (charIndex === currentText.length) {
           isDeleting = true;
-          setTimeout(typeEffect, 2000); // Pause before deleting
+          setTimeout(typeEffect, 1000); // Pause before deleting
           return;
         }
       }
