@@ -11,10 +11,7 @@ import Product from "@/lib/models/product.model";
 import { scrapeAmazonProduct } from "@/lib/scraper";
 import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
 
-// ❌ REMOVE maxDuration (because hobby plan allows max 60s only)
-// export const maxDuration = 300;
 
-// ✅ Keep only this for caching behavior
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 

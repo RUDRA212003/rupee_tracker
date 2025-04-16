@@ -41,7 +41,7 @@ const home = async () => {
 
       <section className='trending-section bg-white dark:bg-[#121212] transition-colors duration-300'>
         <h2 className='section-text text-black dark:text-white'>
-          Trending
+          Search Results
         </h2>
         <div className='flex flex-wrap gap-x-8 gap-y-16'>
           {allProducts?.map((product) => (
