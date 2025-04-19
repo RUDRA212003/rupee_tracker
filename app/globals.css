@@ -262,6 +262,27 @@
   60% {background-position: -8px 5px , 0px 14px, -4px 22px;}
   75%, 100% {background-position: -8px 5px , -8px 14px, -8px 22px; opacity: 0;}
 }
+/* Zoom container */
+.zoom-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* The zoom image */
+.zoom-image {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* Zoom effect on hover */
+#zoom-container:hover #zoom-image {
+  transform: scale(2);
+  transform-origin: center center;
+}
+
+
+
 
 
       
