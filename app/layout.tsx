@@ -10,8 +10,25 @@ const spaceGrotesk = SpaceGrotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'RupeeTracker',
-  description: 'Track product prices effortlessly and save money on your online shopping.',
+  title: {
+    default: 'RupeeTracker – Smart Price & Expense Tracker',
+    template: '%s | RupeeTracker',
+  },
+  description:
+    'RupeeTracker helps you track product prices, monitor expenses, and save money on your online shopping.',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: 'RupeeTracker – Smart Price & Expense Tracker',
+    description:
+      'Track product prices, manage expenses, and save money with RupeeTracker.',
+    url: 'https://rupeetracker.vercel.app',
+    siteName: 'RupeeTracker',
+    type: 'website',
+  },
+  metadataBase: new URL('https://rupeetracker.vercel.app'),
 }
 
 export default function RootLayout({
@@ -20,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark"> {/* Optional: Default to dark mode */}
+    <html lang="en" className="dark">
       <body className={`${inter.className} ${spaceGrotesk.className}`}>
         <main className="max-w-10xl mx-auto">
           <Navbar />
